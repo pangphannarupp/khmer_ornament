@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<!-- removed for now, causes problems in Firefox: manifest="svg-editor.manifest" -->
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="icon" type="image/png" href="images/logo.png" />
+    <link rel="stylesheet" href="svg-editor.css" type="text/css" />
+    <title>Khmer Ornament Tool</title>
+</head>
+
+<body>
+    <div id="svg_editor">
+        <!-- <div id="rulers">
+            <div id="ruler_corner"></div>
+            <div id="ruler_x">
+                <div>
+                    <canvas height="15"></canvas>
+                </div>
+            </div>
+            <div id="ruler_y">
+                <div>
+                    <canvas width="15"></canvas>
+                </div>
+            </div>
+        </div> -->
+        <div id="workarea">
+            <!-- <div id="svgcanvas" style="position:relative">
+            </div> -->
+            <canvas id="myCanvas" width="1000" height="1000" style="border:1px solid #d3d3d3; background: #fff; margin: 70px;">
+                Your browser does not support the HTML5 canvas tag.
+            </canvas>
+        </div>
+        <!-- tools_top -->
+        <div id="tools_left" class="tools_panel">
+            <fieldset>
+                <legend id="svginfo_editor_prefs">Properties</legend>
+                <label><span id="svginfo_lang">Type of ornament:</span>
+                    <select id="lang_select">
+                        <option id="lang_ar" value="ar" selected="selected">Kbach Angkor in Pka Chan</option>
+                        <option id="lang_cs" value="cs">Kbach Pnhei Plerng</option>
+                    </select>
+                </label>
+                <hr>
+                </label>
+                <fieldset id="group_generatetype">
+                    <legend id="svginfo_grid_settings">Generate Types</legend>
+                    <input type="checkbox" id="choose_single"> Generate as single<br/>
+                    <input type="checkbox" id="choose_pattern"> Generate as pattern<br/>
+                    <input type="checkbox" id="choose_frame"> Generate as frame
+                </fieldset>
+                <hr>
+                <fieldset id="group_generatetype">
+                    <legend id="svginfo_grid_settings">Design</legend>
+                        <input type="checkbox" id="showgrid"> Show grid
+                        <hr>
+                        <label><span id="svginfo_icons">Number of petals:</span>
+                            <select id="choose_numberofpetals">
+                                <option id="numberofpetals_3" value="3" selected="selected">3</option>
+                                <option id="numberofpetals_4" value="4">4</option>
+                                <option id="numberofpetals_5" value="5">5</option>
+                                <option id="numberofpetals_6" value="6">6</option>
+                                <option id="numberofpetals_7" value="7">7</option>
+                                <option id="numberofpetals_8" value="8">8</option>
+                                <option id="numberofpetals_9" value="9">9</option>
+                                <option id="numberofpetals_10" value="10">10</option>
+                            </select>
+                        </label>
+                        <hr>
+                        <label><span id="svginfo_icons">Size(px):</span>
+                        <select id="choose_size">
+                            <option id="size_10" value="10" selected="selected">10</option>
+                            <option id="size_20" value="20">20</option>
+                            <option id="size_30" value="30">30</option>
+                            <option id="size_40" value="40">40</option>
+                            <option id="size_50" value="50">50</option>
+                            <option id="size_100" value="100">100</option>
+                            <option id="size_200" value="200">200</option>
+                            <option id="size_250" value="250">250</option>
+                            <option id="size_300" value="300">300</option>
+                            <option id="size_400" value="400">400</option>
+                            <option id="size_500" value="500">500</option>
+                            <option id="size_600" value="600">600</option>
+                            <option id="size_700" value="700">700</option>
+                            <option id="size_800" value="800">800</option>
+                            <option id="size_900" value="900">900</option>
+                            <option id="size_1000" value="1000">1000</option>
+                        </select>
+                    </label>
+                    <hr>
+                    <label><span id="svginfo_icons">Smooth rate(1-5):</span>
+                        <select id="choose_smooth">
+                            <option id="smooth_1" value="1" selected="selected">1</option>
+                            <option id="smooth_2" value="2">2</option>
+                            <option id="smooth_3" value="3">3</option>
+                            <option id="smooth_4" value="4">4</option>
+                            <option id="smooth_5" value="5">5</option>
+                        </select>
+                    </label>
+                    <hr>
+                    <label><span id="svginfo_icons">Color:</span>
+                        <input type="color" id="choose_color" value="#ff0000">
+                    </label>
+                </fieldset>
+                
+                <!-- <hr>
+                <label><span id="svginfo_icons">Smooth rate(1-5):</span>
+                    <input id="choose_smooth_range" type="range" min="0.009" max="0.09" step="0.001"/>
+                </label> -->
+                <hr>
+                <fieldset id="change_grid">
+                    <legend id="svginfo_grid_settings">Position</legend>
+                    <label><span id="svginfo_snap_step">X(px):</span>
+                        <select id="choose_position_x">
+                            <option id="position_x_100" value="100" selected="selected">100</option>
+                            <option id="position_x_200" value="200">200</option>
+                            <option id="position_x_300" value="300">300</option>
+                            <option id="position_x_400" value="400">400</option>
+                            <option id="position_x_500" value="500">500</option>
+                            <option id="position_x_600" value="600">600</option>
+                            <option id="position_x_700" value="700">700</option>
+                            <option id="position_x_800" value="800">800</option>
+                            <option id="position_x_900" value="900">900</option>
+                            <option id="position_x_1000" value="1000">1000</option>
+                        </select>
+                    </label>
+                    <label><span id="svginfo_grid_color">Y(px):</span>
+                        <select id="choose_position_y">
+                            <option id="position_y_100" value="100" selected="selected">100</option>
+                            <option id="position_y_200" value="200">200</option>
+                            <option id="position_y_300" value="300">300</option>
+                            <option id="position_y_400" value="400">400</option>
+                            <option id="position_y_500" value="500">500</option>
+                            <option id="position_y_600" value="600">600</option>
+                            <option id="position_y_700" value="700">700</option>
+                            <option id="position_y_800" value="800">800</option>
+                            <option id="position_y_900" value="900">900</option>
+                            <option id="position_y_1000" value="1000">1000</option>
+                        </select>
+                    </label>
+                </fieldset>
+                <fieldset id="group_rotation">
+                    <legend id="svginfo_grid_settings">Rotation</legend>
+                    <label><span>Angle(degree):</span>
+                        <input type="number" name="choose_rotation" id="choose_rotation" value="0" />
+                    </label>
+                </fieldset>
+                <fieldset id="group_pattern" style="display: none;">
+                    <legend id="svginfo_grid_settings">Pattern</legend>
+                    <label><span id="svginfo_snap_step">Row:</span>
+                        <select id="choose_row">
+                            <option id="row_1" value="1" selected="selected">1</option>
+                            <option id="row_2" value="2">2</option>
+                            <option id="row_3" value="3">3</option>
+                            <option id="row_4" value="4">4</option>
+                            <option id="row_5" value="5">5</option>
+                            <option id="row_6" value="6">6</option>
+                            <option id="row_7" value="7">7</option>
+                            <option id="row_8" value="8">8</option>
+                            <option id="row_9" value="9">9</option>
+                            <option id="row_10" value="10">10</option>
+                        </select>
+                    </label>
+                    <label><span id="svginfo_grid_color">Column:</span>
+                        <select id="choose_column">
+                            <option id="column_1" value="1" selected="selected">1</option>
+                            <option id="column_2" value="2">2</option>
+                            <option id="column_3" value="3">3</option>
+                            <option id="column_4" value="4">4</option>
+                            <option id="column_5" value="5">5</option>
+                            <option id="column_6" value="6">6</option>
+                            <option id="column_7" value="7">7</option>
+                            <option id="column_8" value="8">8</option>
+                            <option id="column_9" value="9">9</option>
+                            <option id="column_10" value="10">10</option>
+                        </select>
+                    </label>
+                </fieldset>
+                <hr>
+                <fieldset id="change_grid">
+                    <legend id="svginfo_grid_settings">Generation</legend>
+                    <div class="group_buttons">
+                        <div class="push_button" id="generate_button" title="Generate Ornament" style="float: left; text-align: center; margin: 2px 2px 4px;"><img class="svg_icon" src="images/fhpath.png" width="24" height="24" alt="icon"></div>
+                        <div class="push_button" id="clear_button" title="Clear Ornament" style="float: left; text-align: center; margin: 2px 2px 4px;"><img class="svg_icon" src="images/delete.png" width="24" height="24" alt="icon"></div>
+                    </div>
+                </fieldset>
+                <hr>
+                <fieldset id="change_grid">
+                    <legend id="svginfo_grid_settings">Export Options</legend>
+                    <div class="group_buttons">
+                        <div class="push_button" id="export_image_button" title="Export As Image" style="float: left; text-align: center; margin: 2px 2px 4px;"><img class="svg_icon" src="images/image.png" width="24" height="24" alt="icon"></div>
+                        <div class="push_button" id="export_pdf_button" title="Export" style="float: left; text-align: center; margin: 2px 2px 4px;"><img class="svg_icon" src="images/pdf.png" width="24" height="24" alt="icon"></div>
+                        <div class="push_button" id="export_svg_button" title="Export" style="float: left; text-align: center; margin: 2px 2px 4px;"><img class="svg_icon" src="images/source.png" width="24" height="24" alt="icon"></div>
+                    </div>
+                </fieldset>
+            </fieldset>
+        </div>
+        <!-- tools_left -->
+    </div>
+    <!-- svg_editor -->
+    <div id="svg_source_editor">
+        <div class="overlay"></div>
+        <div id="svg_source_container">
+            <div id="tool_source_back" class="toolbar_button">
+                <button id="tool_source_save">Apply Changes</button>
+                <button id="tool_source_cancel">Cancel</button>
+            </div>
+            <div id="save_output_btns">
+                <p id="copy_save_note">Copy the contents of this box into a text editor, then save the file with a .svg extension.</p>
+                <button id="copy_save_done">Done</button>
+            </div>
+            <form>
+                <textarea id="svg_source_textarea" spellcheck="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+                    </svg>
+                </textarea>
+            </form>
+        </div>
+        <div id="svg"></div>
+    </div>
+    <script type="text/javascript" src="jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="lib/FileSaver.js"></script>
+    <script type="text/javascript" src="lib/jspdf.min.js"></script>
+    <script type="text/javascript" src="lib/html2canvas.min.js"></script>
+    <script type="text/javascript" src="lib/canvas2svg.js"></script>
+    <script type="text/javascript" src="data_v0.js"></script>
+    <script type="text/javascript" src="common-data.js"></script>
+</body>
+
+</html>
